@@ -1,12 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.google.dagger.hilt.android")
-    kotlin("kapt")
+    kotlin("plugin.serialization") version "1.9.0"
+
 }
 
 android {
-    namespace = "com.example.repositories"
+    namespace = "com.example.navigation"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = 24
@@ -26,14 +26,13 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(libs.bundles.ktor)
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation(project(":data:services"))
-    implementation(project(":domain:searchforweather"))
+
 
 }

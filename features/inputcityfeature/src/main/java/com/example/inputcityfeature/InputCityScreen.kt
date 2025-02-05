@@ -1,10 +1,11 @@
 package com.example.inputcityfeature
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 
 
 @Composable
-fun WeatherSearchScreen(viewModel: WeatherViewModel = hiltViewModel()){
+fun InputCityScreen(viewModel: InputCityViewModel = hiltViewModel(), onCitySelected: (CityModel) -> Unit){
     WeatherSearchContent(
         citiesState = viewModel.weatherResults
     ){ query ->

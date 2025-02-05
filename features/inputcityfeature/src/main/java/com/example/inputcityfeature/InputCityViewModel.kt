@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class WeatherViewModel @Inject constructor(private val getCitiesFromQueryUseCase: IGetCitiesFromQueryUseCase) :
+class InputCityViewModel @Inject constructor(private val getCitiesFromQueryUseCase: IGetCitiesFromQueryUseCase) :
     ViewModel() {
     private val _weatherResults = MutableStateFlow<List<CityModel>>(emptyList())
     val weatherResults: StateFlow<List<CityModel>> = _weatherResults

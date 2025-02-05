@@ -46,7 +46,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.navigation.compose.v276)
     implementation(project(":domain:searchforweather"))
-    implementation("com.google.dagger:hilt-android:2.50")
-    kapt("com.google.dagger:hilt-compiler:2.50")
+    implementation(project(":core:navigations"))
+
 }
