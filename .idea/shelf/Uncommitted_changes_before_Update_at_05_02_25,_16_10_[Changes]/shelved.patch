@@ -1,0 +1,67 @@
+Index: data/services/src/main/java/com/example/services/Constants.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.services\n\nobject Constants {\n    object WeatherDetails {\n        const val PATH = \"/weather\"\n\n        object Parameters {\n            const val LONGITUDE = \"lon\"\n            const val LATITUDE = \"lat\"\n        }\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/data/services/src/main/java/com/example/services/Constants.kt b/data/services/src/main/java/com/example/services/Constants.kt
+--- a/data/services/src/main/java/com/example/services/Constants.kt	(revision 27c8e5e6450d2ec84c13efdce43d306195a8c5a1)
++++ b/data/services/src/main/java/com/example/services/Constants.kt	(date 1738764199932)
+@@ -9,4 +9,11 @@
+             const val LATITUDE = "lat"
+         }
+     }
++
++    object SearchForWeather {
++        const val PATH = "/geo/1.0/direct"
++        object Query {
++            const val query = "q"
++        }
++    }
+ }
+\ No newline at end of file
+Index: .idea/deploymentTargetSelector.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"deploymentTargetSelector\">\n    <selectionStates>\n      <SelectionState runConfigName=\"app\">\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\n      </SelectionState>\n      <SelectionState runConfigName=\"core.base\">\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\n      </SelectionState>\n      <SelectionState runConfigName=\"core.network\">\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\n      </SelectionState>\n      <SelectionState runConfigName=\"data.services\">\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\n      </SelectionState>\n    </selectionStates>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetSelector.xml b/.idea/deploymentTargetSelector.xml
+--- a/.idea/deploymentTargetSelector.xml	(revision 27c8e5e6450d2ec84c13efdce43d306195a8c5a1)
++++ b/.idea/deploymentTargetSelector.xml	(date 1738764607059)
+@@ -5,13 +5,13 @@
+       <SelectionState runConfigName="app">
+         <option name="selectionMode" value="DROPDOWN" />
+       </SelectionState>
+-      <SelectionState runConfigName="core.base">
++      <SelectionState runConfigName="data.services">
+         <option name="selectionMode" value="DROPDOWN" />
+       </SelectionState>
+-      <SelectionState runConfigName="core.network">
++      <SelectionState runConfigName="core.base">
+         <option name="selectionMode" value="DROPDOWN" />
+       </SelectionState>
+-      <SelectionState runConfigName="data.services">
++      <SelectionState runConfigName="core.network">
+         <option name="selectionMode" value="DROPDOWN" />
+       </SelectionState>
+     </selectionStates>
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"GradleSettings\">\n    <option name=\"linkedExternalProjectsSettings\">\n      <GradleProjectSettings>\n        <option name=\"testRunner\" value=\"CHOOSE_PER_TEST\" />\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\n        <option name=\"gradleJvm\" value=\"#GRADLE_LOCAL_JAVA_HOME\" />\n        <option name=\"modules\">\n          <set>\n            <option value=\"$PROJECT_DIR$\" />\n            <option value=\"$PROJECT_DIR$/app\" />\n            <option value=\"$PROJECT_DIR$/core\" />\n            <option value=\"$PROJECT_DIR$/core/base\" />\n            <option value=\"$PROJECT_DIR$/core/network\" />\n            <option value=\"$PROJECT_DIR$/data\" />\n            <option value=\"$PROJECT_DIR$/data/services\" />\n            <option value=\"$PROJECT_DIR$/domain\" />\n            <option value=\"$PROJECT_DIR$/features\" />\n            <option value=\"$PROJECT_DIR$/features/forecast\" />\n            <option value=\"$PROJECT_DIR$/features/inputcityfeature\" />\n          </set>\n        </option>\n        <option name=\"resolveExternalAnnotations\" value=\"false\" />\n      </GradleProjectSettings>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 27c8e5e6450d2ec84c13efdce43d306195a8c5a1)
++++ b/.idea/gradle.xml	(date 1738764607057)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
