@@ -1,4 +1,4 @@
-package com.example.searchforweather.diModules
+package com.example.vodafonetask.di
 
 import com.example.searchforweather.getCitiesFromQuery.GetCitiesFromQueryUseCase
 import com.example.searchforweather.getCitiesFromQuery.IGetCitiesFromQueryUseCase

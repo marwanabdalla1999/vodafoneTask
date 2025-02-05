@@ -8,7 +8,6 @@ plugins {
 
 android {
     namespace = "com.example.inputcityfeature"
-    compileSdk = 34
 
     defaultConfig {
         minSdk = 24

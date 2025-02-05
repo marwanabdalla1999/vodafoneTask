@@ -1,4 +1,4 @@
-package com.example.repositories.diModules
+package com.example.vodafonetask.di
 
 import com.example.repositories.searchForWeatherRepository.SearchForWeatherRepository
 import com.example.repositories.searchForWeatherService.ISearchForWeatherService
