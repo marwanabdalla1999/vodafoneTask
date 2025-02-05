@@ -2,9 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    kotlin("plugin.serialization") version "1.9.0"
-    id("com.google.dagger.hilt.android")
-    kotlin("kapt")
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -13,12 +13,13 @@ android {
 
     defaultConfig {
         applicationId = "com.example.vodafonetask"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
+
     }
 
     buildTypes {
@@ -70,7 +71,6 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(project(":features:inputcityfeature"))
     implementation(project(":core:navigations"))
-
     implementation(libs.androidx.navigation.compose)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
