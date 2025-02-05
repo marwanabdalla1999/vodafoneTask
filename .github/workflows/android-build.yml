@@ -39,7 +39,7 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
         with:
-          api-level: 33
+          api-level: 35
           build-tools: '33.0.0'
           additional-tools: 'platform-tools cmdline-tools'
 
