@@ -6,7 +6,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
 
-class SearchForWeatherService(private val client: HttpClient) : ISearchForWeatherService {
+internal class SearchForWeatherService(private val client: HttpClient) : ISearchForWeatherService {
     override suspend fun searchForWeather(query: String): HttpResponse {
         return client.get(Constants.SearchForWeather.PATH){
             parameter(Constants.SearchForWeather.Query.QUERY,query)

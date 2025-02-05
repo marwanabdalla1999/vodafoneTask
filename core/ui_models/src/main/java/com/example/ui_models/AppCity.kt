@@ -1,8 +1,8 @@
-package com.example.inputcityfeature
+package com.example.ui_models
 
 import com.example.searchforweather.entities.CitiesEntity
 
-data class CityModel(
+data class AppCity(
     val name: String,
     val lat: String,
     val lon: String,
@@ -11,8 +11,8 @@ data class CityModel(
 
 )
 
-fun CitiesEntity.toCityModel(): CityModel {
-    return CityModel(
+fun CitiesEntity.toCityModel(): AppCity {
+    return AppCity(
         name = name,
         lat = lat,
         lon = lon,

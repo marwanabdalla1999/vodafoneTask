@@ -4,6 +4,8 @@ package com.example.inputcityfeature
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.searchforweather.getCitiesFromQuery.IGetCitiesFromQueryUseCase
+import com.example.ui_models.AppCity
+import com.example.ui_models.toCityModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -15,8 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class WeatherViewModel @Inject constructor(private val getCitiesFromQueryUseCase: IGetCitiesFromQueryUseCase) :
     ViewModel() {
-    private val _weatherResults = MutableStateFlow<List<CityModel>>(emptyList())
-    val weatherResults: StateFlow<List<CityModel>> = _weatherResults
+    private val _weatherResults = MutableStateFlow<List<AppCity>>(emptyList())
+    val weatherResults: StateFlow<List<AppCity>> = _weatherResults
 
     private var searchWeatherJob: Job? = null
 
