@@ -2,6 +2,7 @@ package com.example.inputcityfeature
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -32,7 +33,7 @@ fun WeatherSearchContent(
         Spacer(modifier = Modifier.height(16.dp))
 
         LazyColumn {
-            items(cities) { city ->
+            itemsIndexed(cities) { index, city ->
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
