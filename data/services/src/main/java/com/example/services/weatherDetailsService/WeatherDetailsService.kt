@@ -13,4 +13,10 @@ class WeatherDetailsService(private val client: HttpClient) : IWeatherDetailsSer
             parameter(Constants.WeatherDetails.Parameters.LATITUDE, latitude)
         }
     }
+
+    override suspend fun getForecastDetails(longitude: Double, latitude: Double): HttpResponse =
+        client.get(Constants.ForecastDetails.PATH) {
+            parameter(Constants.ForecastDetails.Parameters.LONGITUDE, longitude)
+            parameter(Constants.ForecastDetails.Parameters.LATITUDE, latitude)
+        }
 }
