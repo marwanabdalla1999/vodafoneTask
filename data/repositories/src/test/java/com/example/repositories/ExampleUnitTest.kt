@@ -1,4 +1,4 @@
-package com.example.services
+package com.example.repositories
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

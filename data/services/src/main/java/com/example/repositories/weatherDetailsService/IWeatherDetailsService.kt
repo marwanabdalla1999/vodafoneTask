@@ -1,4 +1,4 @@
-package com.example.services.weatherDetailsService
+package com.example.repositories.weatherDetailsService
 
 import io.ktor.client.statement.HttpResponse
 
