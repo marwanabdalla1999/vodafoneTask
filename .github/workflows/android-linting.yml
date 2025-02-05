@@ -46,8 +46,8 @@ jobs:
       - name: Run Lint Check
         run: ./gradlew lint --stacktrace --info
 
-      # Debug: List all files containing "lint-results"
-      - Debug: Locate Lint Reports
+      # Locate Lint Reports (Debugging)
+      - name: Locate Lint Reports
         run: find . -type f | grep "lint-results" || echo "No lint report found"
 
       # Upload Lint Report
