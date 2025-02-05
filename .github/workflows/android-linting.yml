@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up JDK 17 (or switch to another version if needed)
+      # Set up JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -47,13 +47,17 @@ jobs:
       - name: Grant execute permissions
         run: chmod +x ./gradlew
 
-      # Run Lint check
-      - name: Run Lint
-        run: ./gradlew lint
+      # Run Lint check (Debug & Release)
+      - name: Run Lint Check
+        run: ./gradlew lintDebug lintRelease --continue
 
-      # Upload Lint report as an artifact
+      # Debug: List all Lint reports to find the correct path
+      - name: List Lint Reports
+        run: ls -R app/build/reports/lint/
+
+      # Upload Lint Report as an artifact
       - name: Upload Lint Report
         uses: actions/upload-artifact@v4
         with:
           name: lint-report
-          path: app/build/reports/lint-results.html
+          path: app/build/reports/lint-results-debug.html  # Adjusted path

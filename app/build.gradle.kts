@@ -38,6 +38,10 @@ android {
         compose = true
     }
     buildToolsVersion = "35.0.0"
+    lint {
+        htmlReport = true
+        xmlReport = true
+    }
 }
 
 dependencies {
