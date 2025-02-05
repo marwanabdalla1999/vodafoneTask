@@ -8,7 +8,9 @@ plugins {
 android {
     namespace = "com.example.network"
     compileSdk = libs.versions.compileSdk.get().toInt()
-
+    defaultConfig {
+        minSdk = 24
+    }
 
 }
 

@@ -6,6 +6,9 @@ plugins {
 android {
     namespace = "com.example.base"
     compileSdk = libs.versions.compileSdk.get().toInt()
+    defaultConfig {
+        minSdk = 24
+    }
 
 }
 

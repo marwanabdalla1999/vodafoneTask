@@ -6,6 +6,9 @@ plugins {
 android {
     namespace = "com.example.services"
     compileSdk = libs.versions.compileSdk.get().toInt()
+    defaultConfig {
+        minSdk = 24
+    }
 }
 
 dependencies {
