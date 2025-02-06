@@ -19,6 +19,7 @@ class NetworkHelper {
     }
 
     suspend inline fun <reified T> handleResponse(response: HttpResponse): T? {
+        println(response)
         when (response.status.value) {
             in HttpStatusCode.OK.value..HttpStatusCode.MultipleChoices.value -> {
                 return try {

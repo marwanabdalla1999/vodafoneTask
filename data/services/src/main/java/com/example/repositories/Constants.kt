@@ -11,7 +11,7 @@ object Constants {
     }
 
     object SearchForWeather {
-        const val PATH = "/geo/1.0/direct?q="
+        const val PATH = "/geo/1.0/direct"
 
         object Query {
             const val QUERY = "q"

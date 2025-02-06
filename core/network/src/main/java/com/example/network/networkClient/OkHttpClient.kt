@@ -13,7 +13,6 @@ import kotlinx.serialization.json.Json
 
 internal fun provideOkHttpClient(): HttpClient {
     return HttpClient(OkHttp) {
-        // Install Content Negotiation
         install(ContentNegotiation) {
             json(Json {
                 prettyPrint = true
@@ -25,13 +24,13 @@ internal fun provideOkHttpClient(): HttpClient {
         }
 
 
-        // Default request configuration
         defaultRequest {
-            url(NetworkConstants.BASE_URL) {
-                url.parameters.append(NetworkConstants.APP_ID, NetworkConstants.API_KEY)
-            }
+            url(NetworkConstants.BASE_URL)
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
+            url {
+                parameters.append(NetworkConstants.APP_ID, NetworkConstants.API_KEY)
+            }
         }
     }
 }
