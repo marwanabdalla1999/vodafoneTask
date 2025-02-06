@@ -1,5 +1,8 @@
 package com.example.vodafonetask.di
 
+import com.example.forcast.repositoriesDelegation.IForecastRepository
+import com.example.forcast.usecase.getForecastListingUseCase.GetForecastListingUseCase
+import com.example.forcast.usecase.getForecastListingUseCase.IGetForecastListingUseCase
 import com.example.searchforweather.getCitiesFromQuery.GetCitiesFromQueryUseCase
 import com.example.searchforweather.getCitiesFromQuery.IGetCitiesFromQueryUseCase
 import com.example.searchforweather.repositories.ISearchForWeatherRepository
@@ -16,4 +19,9 @@ object UseCasesModule {
     fun provideCitiesFromQueryUseCase(getWeatherRepository: ISearchForWeatherRepository): IGetCitiesFromQueryUseCase {
         return GetCitiesFromQueryUseCase(getWeatherRepository)
     }
+
+    @Provides
+    fun provideWeatherDetailsUseCase(forecastRepository: IForecastRepository): IGetForecastListingUseCase =
+        GetForecastListingUseCase(forecastRepository)
+
 }

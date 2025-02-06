@@ -2,6 +2,8 @@ package com.example.repositories.diModules
 
 import com.example.repositories.searchForWeatherService.ISearchForWeatherService
 import com.example.repositories.searchForWeatherService.SearchForWeatherService
+import com.example.repositories.weatherDetailsService.IWeatherDetailsService
+import com.example.repositories.weatherDetailsService.WeatherDetailsService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +17,10 @@ object ServicesModule {
     @Provides
     fun provideSearchForWeatherService(client: HttpClient): ISearchForWeatherService {
         return SearchForWeatherService(client)
+    }
+
+    @Provides
+    fun provideWeatherDetailsService(client: HttpClient): IWeatherDetailsService {
+        return WeatherDetailsService(client)
     }
 }

@@ -6,7 +6,7 @@ import com.example.network.NetworkHelper
 import com.example.repositories.weatherDetailsService.IWeatherDetailsService
 import kotlinx.coroutines.flow.flow
 
-internal class ForecastRepository(
+class ForecastRepository(
     private val forecastService: IWeatherDetailsService,
     private val networkHelper: NetworkHelper
 ) : IForecastRepository {
