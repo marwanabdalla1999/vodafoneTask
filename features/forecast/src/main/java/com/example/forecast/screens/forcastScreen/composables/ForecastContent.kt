@@ -7,7 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.beltone.homesand.coreDesign.designsystem.theme.dimenions.Dimensions
+import com.example.design.dimenions.Dimensions
 import com.example.ui_models.AppForecast
 
 @Composable

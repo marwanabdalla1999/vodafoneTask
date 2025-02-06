@@ -6,16 +6,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import com.beltone.homesand.coreDesign.designsystem.theme.dimenions.Dimensions
 import com.example.design.componants.asyncImage.RemoteImage
 import com.example.design.componants.text.KeyAndValueText
+import com.example.design.dimenions.Dimensions
 import com.example.forecast.R
 import com.example.ui_models.AppForecastItem
 
@@ -28,7 +27,7 @@ fun ForecastCard(forecast: AppForecastItem, modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(Dimensions.dp_10dp)
     ) {
-        RemoteImage(url = forecast.weatherIconUrl, modifier = Modifier.size(Dimensions.dp_40dp))
+        RemoteImage(url = forecast.weatherIconUrl)
         KeyAndValueText(key = stringResource(R.string.weather), value = forecast.weather)
         KeyAndValueText(
             key = stringResource(R.string.description),

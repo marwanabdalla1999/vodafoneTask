@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import coil3.compose.AsyncImage
-import com.beltone.homesand.coreDesign.designsystem.theme.dimenions.Dimensions
+import com.example.design.dimenions.Dimensions
 
 
 @Composable

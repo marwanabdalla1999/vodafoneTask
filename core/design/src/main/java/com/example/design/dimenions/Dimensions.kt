@@ -1,4 +1,4 @@
-package com.beltone.homesand.coreDesign.designsystem.theme.dimenions
+package com.example.design.dimenions
 
 import androidx.compose.ui.unit.dp
 

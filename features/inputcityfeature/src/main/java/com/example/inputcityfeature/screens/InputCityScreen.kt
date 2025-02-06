@@ -1,19 +1,31 @@
 package com.example.inputcityfeature.screens
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.ui_models.AppCity
+import com.example.rabbit.core.base.SideEffectsKey
 
 
 @Composable
 fun InputCityScreen(
     viewModel: InputCityViewModel = hiltViewModel(),
-    onCitySelected: (AppCity) -> Unit
+    onCitySelected: (lon: String, lat: String) -> Unit
 ) {
+    LaunchedEffect(SideEffectsKey) {
+        viewModel.lonAndLat.collect {
+            if (it != null) {
+                onCitySelected(it.first.toString(), it.second.toString())
+            }
+
+        }
+    }
     WeatherSearchContent(
         citiesState = viewModel.weatherResults,
-                onCitySelected = onCitySelected
-    ){ query ->
+        onCitySelected = {
+            viewModel.saveLonAndLat(it.lon.toDoubleOrNull() ?: 0.0, it.lat.toDoubleOrNull() ?: 0.0)
+            onCitySelected(it.lon, it.lat)
+        }
+    ) { query ->
         viewModel.searchWeather(query)
     }
 }

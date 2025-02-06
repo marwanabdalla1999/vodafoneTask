@@ -79,6 +79,5 @@ dependencies {
     implementation(project(":features:forecast"))
     implementation(libs.androidx.navigation.compose)
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 }
