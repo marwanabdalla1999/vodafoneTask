@@ -23,7 +23,7 @@ fun InputCityScreen(
         citiesState = viewModel.weatherResults,
         onCitySelected = {
             viewModel.saveLonAndLat(it.lon.toDoubleOrNull() ?: 0.0, it.lat.toDoubleOrNull() ?: 0.0)
-            onCitySelected(it.lon, it.lat)
+            onCitySelected(it.lat, it.lon)
         }
     ) { query ->
         viewModel.searchWeather(query)
