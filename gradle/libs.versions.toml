@@ -61,6 +61,10 @@ androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime
 androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 androidx-storage = { group = "androidx.test.services", name = "storage", version.ref = "storage" }
+coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coilNetworkOkhttp" }
+coil-network-ktor2 = { module = "io.coil-kt.coil3:coil-network-ktor2", version.ref = "coilNetworkOkhttp" }
+coil-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coilNetworkOkhttp" }
+coil-mp = { module = "io.coil-kt.coil3:coil", version.ref = "coilNetworkOkhttp" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -79,4 +83,11 @@ ktor = [
     "ktor-client-okhttp",
     "ktor-client-content-negotiation",
     "ktor-serialization-kotlinx-json"
+]
+coil = [
+    "coil-compose",
+    "coil-compose-core",
+    "coil-network-ktor2",
+    "coil-network-ktor3",
+    "coil-mp"
 ]

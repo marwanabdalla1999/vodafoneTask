@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,7 +28,7 @@ fun ForecastCard(forecast: AppForecastItem, modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(Dimensions.dp_10dp)
     ) {
-        RemoteImage(url = forecast.weatherIconUrl)
+        RemoteImage(url = forecast.weatherIconUrl, modifier = Modifier.size(Dimensions.dp_40dp))
         KeyAndValueText(key = stringResource(R.string.weather), value = forecast.weather)
         KeyAndValueText(
             key = stringResource(R.string.description),
