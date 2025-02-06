@@ -3,6 +3,7 @@ package com.example.vodafonetask
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.example.forecast.screens.forcastScreen.forecastRoute
 import com.example.inputcityfeature.inputCityRoute
 import com.example.navigation.SearchScreen
 
@@ -12,8 +13,8 @@ fun AppNavHost(navController: NavHostController) {
     NavHost(
         navController, startDestination = SearchScreen
     ) {
-        inputCityRoute()
-
+        inputCityRoute(navController)
+        forecastRoute(navController)
     }
 
 }

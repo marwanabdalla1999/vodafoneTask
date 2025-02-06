@@ -6,4 +6,4 @@ import kotlinx.serialization.Serializable
 object SearchScreen
 
 @Serializable
-data class ForecastScreen(val latitude: Double, val longitude: Double)
+data class ForecastScreenRoute(val latitude: String, val longitude: String)

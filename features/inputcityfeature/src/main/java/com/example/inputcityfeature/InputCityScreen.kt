@@ -11,7 +11,8 @@ fun InputCityScreen(
     onCitySelected: (AppCity) -> Unit
 ) {
     WeatherSearchContent(
-        citiesState = viewModel.weatherResults
+        citiesState = viewModel.weatherResults,
+                onCitySelected = onCitySelected
     ){ query ->
         viewModel.searchWeather(query)
     }

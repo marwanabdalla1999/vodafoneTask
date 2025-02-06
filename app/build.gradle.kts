@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.vodafonetask"
-        minSdk = 26
+        minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -76,6 +76,7 @@ dependencies {
     implementation(project(":data:repositories"))
     implementation(project(":data:services"))
     implementation(project(":domain:searchforweather"))
+    implementation(project(":features:forecast"))
     implementation(libs.androidx.navigation.compose)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

@@ -29,7 +29,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.runtime.android)
     implementation(libs.androidx.storage)
-    implementation(libs.androidx.scenecore)
     implementation(libs.kotlinx.collections.immutable)
     implementation(project(":domain:forcast"))
     testImplementation(libs.junit)
@@ -45,5 +44,10 @@ dependencies {
     implementation(project(":core:base"))
     implementation(project(":core:ui_models"))
     implementation(project(":core:design"))
+    implementation(project(":data:repositories"))
+    implementation(project(":data:services"))
+    implementation(project(":domain:searchforweather"))
+    implementation(project(":core:network"))
+    implementation(project(":core:navigations"))
 
 }

@@ -1,22 +1,27 @@
 package com.example.forecast.screens.forcastScreen
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
+import com.example.navigation.ForecastScreenRoute
 
-@Composable
-fun ForecastRoute(
-    latitude: Double,
-    longitude: Double,
-    modifier: Modifier = Modifier,
-    viewModel: ForecastViewModel = hiltViewModel()
+
+fun NavGraphBuilder.forecastRoute(
+    navController: NavHostController
 ) {
-    ForecastScreen(
-        latitude = latitude,
-        longitude = longitude,
-        state = viewModel.viewState.collectAsStateWithLifecycle().value,
-        onEventSent = viewModel::setEvent,
-        sideEffect = viewModel.effect,
-    )
+    composable<ForecastScreenRoute>{
+        val viewModel = hiltViewModel<ForecastViewModel>()
+        val latitude  = it.toRoute<ForecastScreenRoute>().latitude
+        val longitude = it.toRoute<ForecastScreenRoute>().longitude
+        ForecastScreen(
+            latitude = latitude.toDouble(),
+            longitude = longitude.toDouble(),
+            state = viewModel.viewState.collectAsStateWithLifecycle().value,
+            onEventSent = viewModel::setEvent,
+            sideEffect = viewModel.effect,
+        )
+    }
 }

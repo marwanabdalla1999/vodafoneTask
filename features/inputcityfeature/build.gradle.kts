@@ -8,6 +8,7 @@ plugins {
 
 android {
     namespace = "com.example.inputcityfeature"
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         minSdk = 24
@@ -54,5 +55,10 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(project(":domain:searchforweather"))
     implementation(project(":core:navigations"))
+    implementation(project(":data:repositories"))
+    implementation(project(":data:services"))
+    implementation(project(":domain:searchforweather"))
+    implementation(project(":core:network"))
+
 
 }
