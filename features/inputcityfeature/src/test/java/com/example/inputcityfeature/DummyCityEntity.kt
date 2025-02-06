@@ -1,14 +1,18 @@
 package com.example.inputcityfeature
 
 import app.cash.turbine.test
+import com.example.inputcityfeature.screens.InputCityViewModel
 import com.example.searchforweather.entities.CitiesEntity
+import com.example.searchforweather.getCashedLonAndLatUseCase.GetCashedLonAndLatUseCase
 import com.example.searchforweather.getCitiesFromQuery.IGetCitiesFromQueryUseCase
+import com.example.searchforweather.saveLonAndLatUseCase.SaveLonAndLatUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.Before
@@ -17,14 +21,21 @@ import org.junit.Test
 class InputCityViewModelTest {
     private lateinit var viewModel: InputCityViewModel
     private val mockUseCase: IGetCitiesFromQueryUseCase = mockk()
+    private val mockSaveLonAndLatUseCase: SaveLonAndLatUseCase = mockk()
+    private val mockGetCashedLonAndLatUseCase: GetCashedLonAndLatUseCase = mockk()
+
     @OptIn(ExperimentalCoroutinesApi::class)
-    private val testDispatcher = kotlinx.coroutines.test.UnconfinedTestDispatcher()
+    private val testDispatcher = UnconfinedTestDispatcher()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setup() {
         Dispatchers.setMain(testDispatcher)
-        viewModel = InputCityViewModel(mockUseCase)
+        viewModel = InputCityViewModel(
+            mockUseCase,
+            saveLonAndLatUseCase = mockSaveLonAndLatUseCase,
+            getCashedLonAndLatUseCase = mockGetCashedLonAndLatUseCase
+        )
     }
 
 
