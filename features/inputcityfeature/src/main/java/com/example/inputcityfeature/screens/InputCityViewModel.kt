@@ -17,8 +17,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.consumeAsFlow
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -33,7 +32,7 @@ class InputCityViewModel @Inject constructor(
     val weatherResults: StateFlow<List<AppCity>> = _weatherResults
 
     private val _lonAndLat = Channel<Pair<Double, Double>?>()
-    val lonAndLat: Flow<Pair<Double, Double>?> = _lonAndLat.consumeAsFlow()
+    val lonAndLat: Flow<Pair<Double, Double>?> = _lonAndLat.receiveAsFlow()
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
         throwable.printStackTrace()
@@ -52,11 +51,10 @@ class InputCityViewModel @Inject constructor(
 
     private fun getCashedLonAndLat() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            getCashedLonAndLatUseCase.invoke().first {
+            getCashedLonAndLatUseCase.invoke().collect {
                 if (it.first != null && it.second != null) {
                     _lonAndLat.send(Pair(it.first!!, it.second!!))
                 }
-                true
             }
 
         }
