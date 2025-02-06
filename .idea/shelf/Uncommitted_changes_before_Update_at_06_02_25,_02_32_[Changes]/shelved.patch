@@ -1,0 +1,282 @@
+Index: features/inputcityfeature/src/main/java/com/example/inputcityfeature/DiModule.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/features/inputcityfeature/src/main/java/com/example/inputcityfeature/DiModule.kt b/features/inputcityfeature/src/main/java/com/example/inputcityfeature/di/DiModule.kt
+rename from features/inputcityfeature/src/main/java/com/example/inputcityfeature/DiModule.kt
+rename to features/inputcityfeature/src/main/java/com/example/inputcityfeature/di/DiModule.kt
+--- a/features/inputcityfeature/src/main/java/com/example/inputcityfeature/DiModule.kt	(revision 23efb1be26a48634bd6d25969a177f06dd8dc402)
++++ b/features/inputcityfeature/src/main/java/com/example/inputcityfeature/di/DiModule.kt	(date 1738797171673)
+@@ -1,5 +1,6 @@
+-package com.example.inputcityfeature
++package com.example.inputcityfeature.di
+ 
++import com.example.inputcityfeature.InputCityViewModel
+ import com.example.searchforweather.getCitiesFromQuery.IGetCitiesFromQueryUseCase
+ import dagger.Module
+ import dagger.Provides
+Index: features/inputcityfeature/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\n    alias(libs.plugins.android.library)\n    alias(libs.plugins.kotlin.android)\n    alias(libs.plugins.hilt)\n    alias(libs.plugins.kapt)\n    alias(libs.plugins.kotlin.compose)\n}\n\nandroid {\n    namespace = \"com.example.inputcityfeature\"\n\n    defaultConfig {\n        minSdk = 24\n\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\n        consumerProguardFiles(\"consumer-rules.pro\")\n    }\n\n    buildTypes {\n        release {\n            isMinifyEnabled = false\n            proguardFiles(\n                getDefaultProguardFile(\"proguard-android-optimize.txt\"),\n                \"proguard-rules.pro\"\n            )\n        }\n    }\n    compileOptions {\n        sourceCompatibility = JavaVersion.VERSION_17\n        targetCompatibility = JavaVersion.VERSION_17\n    }\n\n    kotlinOptions {\n        jvmTarget = \"17\"\n    }\n}\n\ndependencies {\n\n    implementation(libs.androidx.core.ktx)\n    implementation(libs.androidx.lifecycle.runtime.ktx)\n    implementation(libs.androidx.appcompat)\n    implementation(libs.material)\n    implementation(libs.androidx.runtime.android)\n    implementation(libs.androidx.foundation.android)\n    implementation(libs.androidx.material3.android)\n    implementation(project(\":core:ui_models\"))\n    testImplementation(libs.junit)\n    androidTestImplementation(libs.androidx.junit)\n    androidTestImplementation(libs.androidx.espresso.core)\n    implementation(libs.hilt.android)\n    kapt(libs.hilt.compiler)\n    implementation(libs.androidx.hilt.navigation.compose)\n    implementation(libs.androidx.navigation.compose)\n    implementation(project(\":domain:searchforweather\"))\n    implementation(project(\":core:navigations\"))\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/features/inputcityfeature/build.gradle.kts b/features/inputcityfeature/build.gradle.kts
+--- a/features/inputcityfeature/build.gradle.kts	(revision 23efb1be26a48634bd6d25969a177f06dd8dc402)
++++ b/features/inputcityfeature/build.gradle.kts	(date 1738798316590)
+@@ -8,6 +8,7 @@
+ 
+ android {
+     namespace = "com.example.inputcityfeature"
++    compileSdk = libs.versions.compileSdk.get().toInt()
+ 
+     defaultConfig {
+         minSdk = 24
+@@ -54,5 +55,8 @@
+     implementation(libs.androidx.navigation.compose)
+     implementation(project(":domain:searchforweather"))
+     implementation(project(":core:navigations"))
++    implementation(project(":data:repositories"))
++    implementation(project(":data:services"))
++    implementation(project(":domain:searchforweather"))
+ 
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/vodafonetask/di/RepositoriesModule.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/vodafonetask/di/RepositoriesModule.kt b/app/src/main/java/com/example/vodafonetask/di/RepositoriesModule.kt
+deleted file mode 100644
+--- a/app/src/main/java/com/example/vodafonetask/di/RepositoriesModule.kt	(revision 23efb1be26a48634bd6d25969a177f06dd8dc402)
++++ /dev/null	(revision 23efb1be26a48634bd6d25969a177f06dd8dc402)
+@@ -1,19 +0,0 @@
+-package com.example.vodafonetask.di
+-
+-import com.example.repositories.searchForWeatherRepository.SearchForWeatherRepository
+-import com.example.repositories.searchForWeatherService.ISearchForWeatherService
+-import com.example.searchforweather.repositories.ISearchForWeatherRepository
+-import dagger.Module
+-import dagger.Provides
+-import dagger.hilt.InstallIn
+-import dagger.hilt.components.SingletonComponent
+-
+-@Module
+-@InstallIn(SingletonComponent::class)
+-object RepositoriesModule {
+-
+-    @Provides
+-    fun provideSearchForWeatherRepository(searchForWeatherService: ISearchForWeatherService): ISearchForWeatherRepository {
+-        return SearchForWeatherRepository(searchForWeatherService)
+-    }
+-}
+\ No newline at end of file
+Index: app/src/main/java/com/example/vodafonetask/di/UseCasesModule.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/vodafonetask/di/UseCasesModule.kt b/app/src/main/java/com/example/vodafonetask/di/UseCasesModule.kt
+deleted file mode 100644
+--- a/app/src/main/java/com/example/vodafonetask/di/UseCasesModule.kt	(revision 23efb1be26a48634bd6d25969a177f06dd8dc402)
++++ /dev/null	(revision 23efb1be26a48634bd6d25969a177f06dd8dc402)
+@@ -1,19 +0,0 @@
+-package com.example.vodafonetask.di
+-
+-import com.example.searchforweather.getCitiesFromQuery.GetCitiesFromQueryUseCase
+-import com.example.searchforweather.getCitiesFromQuery.IGetCitiesFromQueryUseCase
+-import com.example.searchforweather.repositories.ISearchForWeatherRepository
+-import dagger.Module
+-import dagger.Provides
+-import dagger.hilt.InstallIn
+-import dagger.hilt.components.SingletonComponent
+-
+-@Module
+-@InstallIn(SingletonComponent::class)
+-object UseCasesModule {
+-
+-    @Provides
+-    fun provideCitiesFromQueryUseCase(getWeatherRepository: ISearchForWeatherRepository): IGetCitiesFromQueryUseCase {
+-        return GetCitiesFromQueryUseCase(getWeatherRepository)
+-    }
+-}
+\ No newline at end of file
+Index: core/navigations/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/compile-file-map.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Thu Feb 06 01:05:17 EET 2025\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/core/navigations/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/compile-file-map.properties b/core/navigations/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/compile-file-map.properties
+--- a/core/navigations/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/compile-file-map.properties	(revision 23efb1be26a48634bd6d25969a177f06dd8dc402)
++++ b/core/navigations/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/compile-file-map.properties	(date 1738798336455)
+@@ -1,1 +1,1 @@
+-#Thu Feb 06 01:05:17 EET 2025
++#Thu Feb 06 01:32:16 EET 2025
+Index: core/navigations/build/intermediates/manifest_merge_blame_file/debugAndroidTest/processDebugAndroidTestManifest/manifest-merger-blame-debug-androidTest-report.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>1<?xml version=\"1.0\" encoding=\"utf-8\"?>\n2<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n3    package=\"com.example.navigation.test\" >\n4\n5    <uses-sdk\n5-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:5:5-74\n6        android:minSdkVersion=\"24\"\n6-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:5:15-41\n7        android:targetSdkVersion=\"24\" />\n7-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:5:42-71\n8\n9    <instrumentation\n9-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:11:5-15:77\n10        android:name=\"android.test.InstrumentationTestRunner\"\n10-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:11:22-75\n11        android:functionalTest=\"false\"\n11-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:14:22-52\n12        android:handleProfiling=\"false\"\n12-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:13:22-53\n13        android:label=\"Tests for com.example.navigation.test\"\n13-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:15:22-75\n14        android:targetPackage=\"com.example.navigation.test\" />\n14-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:12:22-73\n15\n16    <queries>\n16-->[androidx.test:runner:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/eea108ba590d22cad2d7f6bb10cff747/transformed/runner-1.6.1/AndroidManifest.xml:24:5-28:15\n17        <package android:name=\"androidx.test.orchestrator\" />\n17-->[androidx.test:runner:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/eea108ba590d22cad2d7f6bb10cff747/transformed/runner-1.6.1/AndroidManifest.xml:25:9-62\n17-->[androidx.test:runner:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/eea108ba590d22cad2d7f6bb10cff747/transformed/runner-1.6.1/AndroidManifest.xml:25:18-59\n18        <package android:name=\"androidx.test.services\" />\n18-->[androidx.test:runner:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/eea108ba590d22cad2d7f6bb10cff747/transformed/runner-1.6.1/AndroidManifest.xml:26:9-58\n18-->[androidx.test:runner:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/eea108ba590d22cad2d7f6bb10cff747/transformed/runner-1.6.1/AndroidManifest.xml:26:18-55\n19        <package android:name=\"com.google.android.apps.common.testing.services\" />\n19-->[androidx.test:runner:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/eea108ba590d22cad2d7f6bb10cff747/transformed/runner-1.6.1/AndroidManifest.xml:27:9-83\n19-->[androidx.test:runner:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/eea108ba590d22cad2d7f6bb10cff747/transformed/runner-1.6.1/AndroidManifest.xml:27:18-80\n20    </queries>\n21\n22    <uses-permission android:name=\"android.permission.REORDER_TASKS\" />\n22-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:24:5-72\n22-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:24:22-69\n23\n24    <permission\n24-->[androidx.core:core:1.15.0] /Users/marwan/.gradle/caches/8.9/transforms/aabf2bb4415cb406e22b97648f694f97/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47\n25        android:name=\"com.example.navigation.test.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION\"\n25-->[androidx.core:core:1.15.0] /Users/marwan/.gradle/caches/8.9/transforms/aabf2bb4415cb406e22b97648f694f97/transformed/core-1.15.0/AndroidManifest.xml:23:9-81\n26        android:protectionLevel=\"signature\" />\n26-->[androidx.core:core:1.15.0] /Users/marwan/.gradle/caches/8.9/transforms/aabf2bb4415cb406e22b97648f694f97/transformed/core-1.15.0/AndroidManifest.xml:24:9-44\n27\n28    <uses-permission android:name=\"com.example.navigation.test.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION\" />\n28-->[androidx.core:core:1.15.0] /Users/marwan/.gradle/caches/8.9/transforms/aabf2bb4415cb406e22b97648f694f97/transformed/core-1.15.0/AndroidManifest.xml:26:5-97\n28-->[androidx.core:core:1.15.0] /Users/marwan/.gradle/caches/8.9/transforms/aabf2bb4415cb406e22b97648f694f97/transformed/core-1.15.0/AndroidManifest.xml:26:22-94\n29\n30    <application\n30-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:7:5-9:19\n31        android:appComponentFactory=\"androidx.core.app.CoreComponentFactory\"\n31-->[androidx.core:core:1.15.0] /Users/marwan/.gradle/caches/8.9/transforms/aabf2bb4415cb406e22b97648f694f97/transformed/core-1.15.0/AndroidManifest.xml:28:18-86\n32        android:debuggable=\"true\"\n33        android:extractNativeLibs=\"false\" >\n34        <uses-library android:name=\"android.test.runner\" />\n34-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:8:9-60\n34-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:8:23-57\n35\n36        <activity\n36-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:27:9-34:20\n37            android:name=\"androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity\"\n37-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:28:13-99\n38            android:exported=\"true\"\n38-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:29:13-36\n39            android:theme=\"@style/WhiteBackgroundTheme\" >\n39-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:30:13-56\n40            <intent-filter android:priority=\"-100\" >\n40-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:31:13-33:29\n40-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:31:28-51\n41                <category android:name=\"android.intent.category.LAUNCHER\" />\n41-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:32:17-77\n41-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:32:27-74\n42            </intent-filter>\n43        </activity>\n44        <activity\n44-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:35:9-42:20\n45            android:name=\"androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity\"\n45-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:36:13-95\n46            android:exported=\"true\"\n46-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:37:13-36\n47            android:theme=\"@style/WhiteBackgroundTheme\" >\n47-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:38:13-56\n48            <intent-filter android:priority=\"-100\" >\n48-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:31:13-33:29\n48-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:31:28-51\n49                <category android:name=\"android.intent.category.LAUNCHER\" />\n49-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:32:17-77\n49-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:32:27-74\n50            </intent-filter>\n51        </activity>\n52        <activity\n52-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:43:9-50:20\n53            android:name=\"androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity\"\n53-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:44:13-103\n54            android:exported=\"true\"\n54-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:45:13-36\n55            android:theme=\"@style/WhiteBackgroundDialogTheme\" >\n55-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:46:13-62\n56            <intent-filter android:priority=\"-100\" >\n56-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:31:13-33:29\n56-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:31:28-51\n57                <category android:name=\"android.intent.category.LAUNCHER\" />\n57-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:32:17-77\n57-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:32:27-74\n58            </intent-filter>\n59        </activity>\n60\n61        <provider\n61-->[androidx.emoji2:emoji2:1.3.0] /Users/marwan/.gradle/caches/8.9/transforms/275de8aa17d479181e91c95aeabb2c05/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20\n62            android:name=\"androidx.startup.InitializationProvider\"\n62-->[androidx.emoji2:emoji2:1.3.0] /Users/marwan/.gradle/caches/8.9/transforms/275de8aa17d479181e91c95aeabb2c05/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67\n63            android:authorities=\"com.example.navigation.test.androidx-startup\"\n63-->[androidx.emoji2:emoji2:1.3.0] /Users/marwan/.gradle/caches/8.9/transforms/275de8aa17d479181e91c95aeabb2c05/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68\n64            android:exported=\"false\" >\n64-->[androidx.emoji2:emoji2:1.3.0] /Users/marwan/.gradle/caches/8.9/transforms/275de8aa17d479181e91c95aeabb2c05/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37\n65            <meta-data\n65-->[androidx.emoji2:emoji2:1.3.0] /Users/marwan/.gradle/caches/8.9/transforms/275de8aa17d479181e91c95aeabb2c05/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52\n66                android:name=\"androidx.emoji2.text.EmojiCompatInitializer\"\n66-->[androidx.emoji2:emoji2:1.3.0] /Users/marwan/.gradle/caches/8.9/transforms/275de8aa17d479181e91c95aeabb2c05/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75\n67                android:value=\"androidx.startup\" />\n67-->[androidx.emoji2:emoji2:1.3.0] /Users/marwan/.gradle/caches/8.9/transforms/275de8aa17d479181e91c95aeabb2c05/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49\n68            <meta-data\n68-->[androidx.lifecycle:lifecycle-process:2.8.7] /Users/marwan/.gradle/caches/8.9/transforms/0302c7c116aebb777f87c2db0da18350/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52\n69                android:name=\"androidx.lifecycle.ProcessLifecycleInitializer\"\n69-->[androidx.lifecycle:lifecycle-process:2.8.7] /Users/marwan/.gradle/caches/8.9/transforms/0302c7c116aebb777f87c2db0da18350/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78\n70                android:value=\"androidx.startup\" />\n70-->[androidx.lifecycle:lifecycle-process:2.8.7] /Users/marwan/.gradle/caches/8.9/transforms/0302c7c116aebb777f87c2db0da18350/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49\n71            <meta-data\n71-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52\n72                android:name=\"androidx.profileinstaller.ProfileInstallerInitializer\"\n72-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85\n73                android:value=\"androidx.startup\" />\n73-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49\n74        </provider>\n75\n76        <receiver\n76-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20\n77            android:name=\"androidx.profileinstaller.ProfileInstallReceiver\"\n77-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76\n78            android:directBootAware=\"false\"\n78-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44\n79            android:enabled=\"true\"\n79-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35\n80            android:exported=\"true\"\n80-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36\n81            android:permission=\"android.permission.DUMP\" >\n81-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57\n82            <intent-filter>\n82-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29\n83                <action android:name=\"androidx.profileinstaller.action.INSTALL_PROFILE\" />\n83-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91\n83-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88\n84            </intent-filter>\n85            <intent-filter>\n85-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29\n86                <action android:name=\"androidx.profileinstaller.action.SKIP_FILE\" />\n86-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85\n86-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82\n87            </intent-filter>\n88            <intent-filter>\n88-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29\n89                <action android:name=\"androidx.profileinstaller.action.SAVE_PROFILE\" />\n89-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88\n89-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85\n90            </intent-filter>\n91            <intent-filter>\n91-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29\n92                <action android:name=\"androidx.profileinstaller.action.BENCHMARK_OPERATION\" />\n92-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95\n92-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/marwan/.gradle/caches/8.9/transforms/0ccf86160f69a3a75a379a28a640d1eb/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92\n93            </intent-filter>\n94        </receiver>\n95    </application>\n96\n97</manifest>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/core/navigations/build/intermediates/manifest_merge_blame_file/debugAndroidTest/processDebugAndroidTestManifest/manifest-merger-blame-debug-androidTest-report.txt b/core/navigations/build/intermediates/manifest_merge_blame_file/debugAndroidTest/processDebugAndroidTestManifest/manifest-merger-blame-debug-androidTest-report.txt
+--- a/core/navigations/build/intermediates/manifest_merge_blame_file/debugAndroidTest/processDebugAndroidTestManifest/manifest-merger-blame-debug-androidTest-report.txt	(revision 23efb1be26a48634bd6d25969a177f06dd8dc402)
++++ b/core/navigations/build/intermediates/manifest_merge_blame_file/debugAndroidTest/processDebugAndroidTestManifest/manifest-merger-blame-debug-androidTest-report.txt	(date 1738798336864)
+@@ -3,24 +3,24 @@
+ 3    package="com.example.navigation.test" >
+ 4
+ 5    <uses-sdk
+-5-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:5:5-74
++5-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1581253547424679931.xml:5:5-74
+ 6        android:minSdkVersion="24"
+-6-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:5:15-41
++6-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1581253547424679931.xml:5:15-41
+ 7        android:targetSdkVersion="24" />
+-7-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:5:42-71
++7-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1581253547424679931.xml:5:42-71
+ 8
+ 9    <instrumentation
+-9-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:11:5-15:77
++9-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1581253547424679931.xml:11:5-15:77
+ 10        android:name="android.test.InstrumentationTestRunner"
+-10-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:11:22-75
++10-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1581253547424679931.xml:11:22-75
+ 11        android:functionalTest="false"
+-11-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:14:22-52
++11-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1581253547424679931.xml:14:22-52
+ 12        android:handleProfiling="false"
+-12-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:13:22-53
++12-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1581253547424679931.xml:13:22-53
+ 13        android:label="Tests for com.example.navigation.test"
+-13-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:15:22-75
++13-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1581253547424679931.xml:15:22-75
+ 14        android:targetPackage="com.example.navigation.test" />
+-14-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:12:22-73
++14-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1581253547424679931.xml:12:22-73
+ 15
+ 16    <queries>
+ 16-->[androidx.test:runner:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/eea108ba590d22cad2d7f6bb10cff747/transformed/runner-1.6.1/AndroidManifest.xml:24:5-28:15
+@@ -51,14 +51,14 @@
+ 28-->[androidx.core:core:1.15.0] /Users/marwan/.gradle/caches/8.9/transforms/aabf2bb4415cb406e22b97648f694f97/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+ 29
+ 30    <application
+-30-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:7:5-9:19
++30-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1581253547424679931.xml:7:5-9:19
+ 31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+ 31-->[androidx.core:core:1.15.0] /Users/marwan/.gradle/caches/8.9/transforms/aabf2bb4415cb406e22b97648f694f97/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
+ 32        android:debuggable="true"
+ 33        android:extractNativeLibs="false" >
+ 34        <uses-library android:name="android.test.runner" />
+-34-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:8:9-60
+-34-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest16426407817925798406.xml:8:23-57
++34-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1581253547424679931.xml:8:9-60
++34-->/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest1581253547424679931.xml:8:23-57
+ 35
+ 36        <activity
+ 36-->[androidx.test:core:1.6.1] /Users/marwan/.gradle/caches/8.9/transforms/2065692776ff17db27e3953bdf6d2461/transformed/core-1.6.1/AndroidManifest.xml:27:9-34:20
+Index: features/inputcityfeature/src/main/java/com/example/inputcityfeature/di/UseCasesModule.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/features/inputcityfeature/src/main/java/com/example/inputcityfeature/di/UseCasesModule.kt b/features/inputcityfeature/src/main/java/com/example/inputcityfeature/di/UseCasesModule.kt
+new file mode 100644
+--- /dev/null	(date 1738797171666)
++++ b/features/inputcityfeature/src/main/java/com/example/inputcityfeature/di/UseCasesModule.kt	(date 1738797171666)
+@@ -0,0 +1,19 @@
++package com.example.inputcityfeature.di
++
++import com.example.searchforweather.getCitiesFromQuery.GetCitiesFromQueryUseCase
++import com.example.searchforweather.getCitiesFromQuery.IGetCitiesFromQueryUseCase
++import com.example.searchforweather.repositories.ISearchForWeatherRepository
++import dagger.Module
++import dagger.Provides
++import dagger.hilt.InstallIn
++import dagger.hilt.components.SingletonComponent
++
++@Module
++@InstallIn(SingletonComponent::class)
++object UseCasesModule {
++
++    @Provides
++    fun provideCitiesFromQueryUseCase(getWeatherRepository: ISearchForWeatherRepository): IGetCitiesFromQueryUseCase {
++        return GetCitiesFromQueryUseCase(getWeatherRepository)
++    }
++}
+\ No newline at end of file
+Index: core/navigations/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Thu Feb 06 01:05:06 EET 2025\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/core/navigations/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties b/core/navigations/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+--- a/core/navigations/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties	(revision 23efb1be26a48634bd6d25969a177f06dd8dc402)
++++ b/core/navigations/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties	(date 1738798322286)
+@@ -1,1 +1,1 @@
+-#Thu Feb 06 01:05:06 EET 2025
++#Thu Feb 06 01:32:02 EET 2025
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\n  <component name=\"GradleSettings\">\n    <option name=\"linkedExternalProjectsSettings\">\n      <GradleProjectSettings>\n        <option name=\"testRunner\" value=\"CHOOSE_PER_TEST\" />\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\n        <option name=\"gradleJvm\" value=\"#GRADLE_LOCAL_JAVA_HOME\" />\n        <option name=\"modules\">\n          <set>\n            <option value=\"$PROJECT_DIR$\" />\n            <option value=\"$PROJECT_DIR$/app\" />\n            <option value=\"$PROJECT_DIR$/core\" />\n            <option value=\"$PROJECT_DIR$/core/base\" />\n            <option value=\"$PROJECT_DIR$/core/di\" />\n            <option value=\"$PROJECT_DIR$/core/navigations\" />\n            <option value=\"$PROJECT_DIR$/core/network\" />\n            <option value=\"$PROJECT_DIR$/core/ui_models\" />\n            <option value=\"$PROJECT_DIR$/data\" />\n            <option value=\"$PROJECT_DIR$/data/repositories\" />\n            <option value=\"$PROJECT_DIR$/data/services\" />\n            <option value=\"$PROJECT_DIR$/domain\" />\n            <option value=\"$PROJECT_DIR$/domain/forcast\" />\n            <option value=\"$PROJECT_DIR$/domain/searchforweather\" />\n            <option value=\"$PROJECT_DIR$/features\" />\n            <option value=\"$PROJECT_DIR$/features/forecast\" />\n            <option value=\"$PROJECT_DIR$/features/inputcityfeature\" />\n          </set>\n        </option>\n        <option name=\"resolveExternalAnnotations\" value=\"false\" />\n      </GradleProjectSettings>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 23efb1be26a48634bd6d25969a177f06dd8dc402)
++++ b/.idea/gradle.xml	(date 1738799329207)
+@@ -13,7 +13,6 @@
+             <option value="$PROJECT_DIR$/app" />
+             <option value="$PROJECT_DIR$/core" />
+             <option value="$PROJECT_DIR$/core/base" />
+-            <option value="$PROJECT_DIR$/core/di" />
+             <option value="$PROJECT_DIR$/core/navigations" />
+             <option value="$PROJECT_DIR$/core/network" />
+             <option value="$PROJECT_DIR$/core/ui_models" />
+Index: features/inputcityfeature/src/main/java/com/example/inputcityfeature/di/RepositoriesModule.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/features/inputcityfeature/src/main/java/com/example/inputcityfeature/di/RepositoriesModule.kt b/features/inputcityfeature/src/main/java/com/example/inputcityfeature/di/RepositoriesModule.kt
+new file mode 100644
+--- /dev/null	(date 1738797171662)
++++ b/features/inputcityfeature/src/main/java/com/example/inputcityfeature/di/RepositoriesModule.kt	(date 1738797171662)
+@@ -0,0 +1,19 @@
++package com.example.inputcityfeature.di
++
++import com.example.repositories.searchForWeatherRepository.SearchForWeatherRepository
++import com.example.repositories.searchForWeatherService.ISearchForWeatherService
++import com.example.searchforweather.repositories.ISearchForWeatherRepository
++import dagger.Module
++import dagger.Provides
++import dagger.hilt.InstallIn
++import dagger.hilt.components.SingletonComponent
++
++@Module
++@InstallIn(SingletonComponent::class)
++object RepositoriesModule {
++
++    @Provides
++    fun provideSearchForWeatherRepository(searchForWeatherService: ISearchForWeatherService): ISearchForWeatherRepository {
++        return SearchForWeatherRepository(searchForWeatherService)
++    }
++}
+\ No newline at end of file
+Index: core/navigations/build/intermediates/incremental/packageDebugAndroidTest/tmp/debugAndroidTest/dex-renamer-state.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Thu Feb 06 01:05:22 EET 2025\nbase.0=/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/dex/debugAndroidTest/mergeExtDexDebugAndroidTest/classes.dex\nbase.1=/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/dex/debugAndroidTest/mergeLibDexDebugAndroidTest/14/classes.dex\nbase.2=/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/dex/debugAndroidTest/mergeProjectDexDebugAndroidTest/0/classes.dex\nbase.3=/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/dex/debugAndroidTest/mergeExtDexDebugAndroidTest/classes2.dex\npath.0=classes.dex\npath.1=14/classes.dex\npath.2=0/classes.dex\npath.3=classes2.dex\nrenamed.0=classes.dex\nrenamed.1=classes2.dex\nrenamed.2=classes3.dex\nrenamed.3=classes4.dex\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/core/navigations/build/intermediates/incremental/packageDebugAndroidTest/tmp/debugAndroidTest/dex-renamer-state.txt b/core/navigations/build/intermediates/incremental/packageDebugAndroidTest/tmp/debugAndroidTest/dex-renamer-state.txt
+--- a/core/navigations/build/intermediates/incremental/packageDebugAndroidTest/tmp/debugAndroidTest/dex-renamer-state.txt	(revision 23efb1be26a48634bd6d25969a177f06dd8dc402)
++++ b/core/navigations/build/intermediates/incremental/packageDebugAndroidTest/tmp/debugAndroidTest/dex-renamer-state.txt	(date 1738798363592)
+@@ -1,4 +1,4 @@
+-#Thu Feb 06 01:05:22 EET 2025
++#Thu Feb 06 01:32:43 EET 2025
+ base.0=/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/dex/debugAndroidTest/mergeExtDexDebugAndroidTest/classes.dex
+ base.1=/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/dex/debugAndroidTest/mergeLibDexDebugAndroidTest/14/classes.dex
+ base.2=/Users/marwan/AndroidStudioProjects/vodafoneTask/core/navigations/build/intermediates/dex/debugAndroidTest/mergeProjectDexDebugAndroidTest/0/classes.dex

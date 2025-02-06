@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Update_at_06_02_25,_02_32_[Changes]" date="1738801949111" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_02_25,_02_32_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 06.02.25, 02:32 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="core/navigations/build/outputs/apk/androidTest/debug/navigations-debug-androidTest.apk" />
+    <option name="AFTER_PATH" value="core/navigations/build/outputs/apk/androidTest/debug/navigations-debug-androidTest.apk" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_02_25,_02_32_[Changes]/navigations-debug-androidTest.apk" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="core/navigations/build/kotlin/compileDebugKotlin/cacheable/last-build.bin" />
+    <option name="AFTER_PATH" value="core/navigations/build/kotlin/compileDebugKotlin/cacheable/last-build.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_02_25,_02_32_[Changes]/last-build.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="core/navigations/build/kotlin/compileDebugKotlin/local-state/build-history.bin" />
+    <option name="AFTER_PATH" value="core/navigations/build/kotlin/compileDebugKotlin/local-state/build-history.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_06_02_25,_02_32_[Changes]/build-history.bin" />
+  </binary>
+</changelist>
