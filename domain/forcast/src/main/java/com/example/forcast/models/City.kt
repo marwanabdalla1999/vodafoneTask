@@ -7,19 +7,19 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class City(
     @SerialName("coord")
-    val coord: Coord,
+    val coord: Coord?,
     @SerialName("country")
-    val country: String,
+    val country: String?,
     @SerialName("id")
-    val id: Int,
+    val id: Int?,
     @SerialName("name")
-    val name: String,
+    val name: String?,
     @SerialName("population")
-    val population: Int,
+    val population: Int?,
     @SerialName("sunrise")
-    val sunrise: Int,
+    val sunrise: Int?,
     @SerialName("sunset")
-    val sunset: Int,
+    val sunset: Int?,
     @SerialName("timezone")
-    val timezone: Int
+    val timezone: Int?
 )

@@ -7,25 +7,25 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ForecastItem(
     @SerialName("clouds")
-    val clouds: Clouds,
+    val clouds: Clouds?,
     @SerialName("dt")
-    val dt: Int,
+    val dt: Int?,
     @SerialName("dt_txt")
-    val dtTxt: String,
+    val dtTxt: String?,
     @SerialName("main")
-    val main: Main,
+    val main: Main?,
     @SerialName("pop")
-    val pop: Double,
+    val pop: Double?,
     @SerialName("rain")
     val rain: Rain?,
     @SerialName("snow")
     val snow: Snow?,
     @SerialName("sys")
-    val sys: Sys,
+    val sys: Sys?,
     @SerialName("visibility")
-    val visibility: Int,
+    val visibility: Int?,
     @SerialName("weather")
     val weather: List<Weather>,
     @SerialName("wind")
-    val wind: Wind
+    val wind: Wind?
 )

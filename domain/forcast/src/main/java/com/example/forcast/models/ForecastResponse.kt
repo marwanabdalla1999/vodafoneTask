@@ -7,13 +7,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ForecastResponse(
     @SerialName("city")
-    val city: City,
+    val city: City?,
     @SerialName("cnt")
-    val cnt: Int,
+    val cnt: Int?,
     @SerialName("cod")
-    val cod: String,
+    val cod: String?,
     @SerialName("list")
-    val list: List<ForecastItem>,
+    val list: List<ForecastItem?>,
     @SerialName("message")
-    val message: Int
+    val message: Int?
 )

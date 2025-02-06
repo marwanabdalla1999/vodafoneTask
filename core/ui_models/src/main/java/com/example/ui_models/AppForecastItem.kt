@@ -14,10 +14,10 @@ data class AppForecastItem(
 
 fun ForecastItem.toAppForecastItem(): AppForecastItem = AppForecastItem(
     weather = weather.firstOrNull()?.main ?: "",
-    temperature = main.temp.toString(),
-    humidity = main.humidity.toString(),
-    windSpeed = wind.speed.toString(),
-    pressure = main.pressure.toString(),
+    temperature = main?.temp.toString(),
+    humidity = main?.humidity.toString(),
+    windSpeed = wind?.speed.toString(),
+    pressure = main?.pressure.toString(),
     weatherDescription = weather.firstOrNull()?.description ?: "",
     weatherIconUrl = "https://openweathermap.org/img/wn/${weather.firstOrNull()?.icon}@2x.png"
 )
