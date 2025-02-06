@@ -35,6 +35,9 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+    testImplementation (libs.kotlinx.coroutines.test)
+    testImplementation (libs.turbine)
+    testImplementation (libs.mockk)
     implementation(project(":data:services"))
     implementation(project(":domain:searchforweather"))
 

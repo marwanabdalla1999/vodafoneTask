@@ -3,7 +3,6 @@ package com.example.inputcityfeature.screens
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.rabbit.core.base.SideEffectsKey
 
 
 @Composable
