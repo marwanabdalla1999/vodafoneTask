@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.example.forecast.screens.forcastScreen.forecastRoute
-import com.example.inputcityfeature.inputCityRoute
+import com.example.inputcityfeature.screens.inputCityRoute
 import com.example.navigation.SearchScreen
 
 

@@ -1,12 +1,9 @@
-package com.example.forecast.screens.forcastScreen.di
+package com.example.forecast.di
 
 
 import com.example.forcast.repositoriesDelegation.IForecastRepository
 import com.example.forcast.usecase.getForecastListingUseCase.GetForecastListingUseCase
 import com.example.forcast.usecase.getForecastListingUseCase.IGetForecastListingUseCase
-import com.example.searchforweather.getCitiesFromQuery.GetCitiesFromQueryUseCase
-import com.example.searchforweather.getCitiesFromQuery.IGetCitiesFromQueryUseCase
-import com.example.searchforweather.repositories.ISearchForWeatherRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

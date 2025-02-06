@@ -1,4 +1,4 @@
-package com.example.inputcityfeature
+package com.example.inputcityfeature.screens
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController

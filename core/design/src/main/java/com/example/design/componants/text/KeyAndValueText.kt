@@ -6,6 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.beltone.homesand.coreDesign.designsystem.theme.dimenions.Dimensions
 
 @Composable
@@ -20,6 +21,6 @@ fun KeyAndValueText(
         horizontalArrangement = Arrangement.spacedBy(Dimensions.dp_10dp)
     ) {
         Text(text = key)
-        Text(text = value)
+        Text(text = value, color = Color.Gray)
     }
 }

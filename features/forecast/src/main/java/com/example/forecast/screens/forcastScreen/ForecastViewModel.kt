@@ -4,9 +4,10 @@ import com.example.forcast.usecase.getForecastListingUseCase.IGetForecastListing
 import com.example.rabbit.core.base.BaseViewModel
 import com.example.ui_models.toAppForecast
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 @HiltViewModel
-class ForecastViewModel(
+class ForecastViewModel @Inject constructor(
     private val getForecastUseCase: IGetForecastListingUseCase
 ) : BaseViewModel<ForecastState, ForecastEvent, ForecastSideEffect>() {
     override fun setInitialState(): ForecastState = ForecastState.Ideal
@@ -33,7 +34,6 @@ class ForecastViewModel(
             },
             onError = {
                 setState { ForecastState.Error(it) }
-                setEffect { ForecastSideEffect.ShowToast(it.message ?: "") }
             }
         )
     }

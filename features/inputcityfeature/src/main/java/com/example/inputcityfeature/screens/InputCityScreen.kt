@@ -1,4 +1,4 @@
-package com.example.inputcityfeature
+package com.example.inputcityfeature.screens
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel

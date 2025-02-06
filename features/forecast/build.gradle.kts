@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     id("com.google.dagger.hilt.android")
     kotlin("kapt")
 }
@@ -30,7 +31,6 @@ dependencies {
     implementation(libs.androidx.runtime.android)
     implementation(libs.androidx.storage)
     implementation(libs.kotlinx.collections.immutable)
-    implementation(project(":domain:forcast"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -49,5 +49,5 @@ dependencies {
     implementation(project(":domain:searchforweather"))
     implementation(project(":core:network"))
     implementation(project(":core:navigations"))
-
+    implementation(project(":domain:forcast"))
 }

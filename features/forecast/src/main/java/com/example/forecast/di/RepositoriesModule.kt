@@ -1,5 +1,6 @@
-package com.example.forecast.screens.forcastScreen.di
+package com.example.forecast.di
 
+import com.example.forcast.repositoriesDelegation.IForecastRepository
 import com.example.network.NetworkHelper
 import com.example.repositories.forecastRepository.ForecastRepository
 import com.example.repositories.weatherDetailsService.IWeatherDetailsService
@@ -15,6 +16,6 @@ object RepositoriesModule {
     fun provideForecastDetailsRepository(
         forecastDetailsService: IWeatherDetailsService,
         networkHelper: NetworkHelper
-    ) = ForecastRepository(forecastDetailsService, networkHelper)
+    ): IForecastRepository = ForecastRepository(forecastDetailsService, networkHelper)
 
 }
